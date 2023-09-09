@@ -33,7 +33,7 @@ RSpec.describe 'api/v1/wines', type: :request do
           data = JSON.parse(response.body)
           expect(data.length).to eq(2)
           expect(data[0]['name']).to eq('Beaujolais')
-          expect(data[0]['name']).to eq('Bourgogne')
+          expect(data[1]['name']).to eq('Bourgogne')
         end
       end
     end

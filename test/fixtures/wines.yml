@@ -8,13 +8,13 @@ one:
 
 two:
   name: "Beaujolais"
-  price_euros: 15.99
+  price_euros: 10
   store_url: https://www.store2.com
   note: 3.9
 
 tree:
   name: "Bourgogne"
-  price_euros: 25.99
+  price_euros: 30
   store_url: https://www.store2.com
   note: 4
 

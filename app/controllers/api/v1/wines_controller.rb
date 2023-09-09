@@ -1,7 +1,16 @@
 class Api::V1::WinesController < ApplicationController
   # GET /api/v1/wines
   def index
-    @wines = Wine.all
+    if params[:min_price] && params[:max_price]
+      @wines = Wine.where('price_euros >= ? AND price_euros <= ?', params[:min_price], params[:max_price])
+    elsif params[:min_price]
+      @wines = Wine.where('price_euros >= ?', params[:min_price])
+    elsif params[:max_price]
+      @wines = Wine.where('price_euros <= ?', params[:max_price])
+    else
+      @wines = Wine.all
+    end
+
     render json: @wines
   end
 

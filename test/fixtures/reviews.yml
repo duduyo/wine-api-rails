@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+reviews_one_for_wine_two:
+  wine: two
+  comment: "Great comment"
+  note: 2
+
+reviews_two_for_wine_two:
+  wine: two
+  comment: "Great comment"
+  note: 3

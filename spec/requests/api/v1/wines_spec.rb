@@ -9,7 +9,7 @@ RSpec.describe 'api/v1/wines', type: :request do
       name: { type: :string },
       price_euros: { type: :number },
       store_url: { type: :string },
-      note: { type: :number },
+      note: { type: :number, nullable: true },
       created_at: { type: :string },
       updated_at: { type: :string }
     },

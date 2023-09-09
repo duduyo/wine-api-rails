@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_09_100806) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_09_141018) do
+  create_table "reviews", force: :cascade do |t|
+    t.integer "wine_id", null: false
+    t.string "comment"
+    t.float "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wine_id"], name: "index_reviews_on_wine_id"
+  end
+
   create_table "wines", force: :cascade do |t|
     t.string "name"
     t.float "price_euros"
@@ -20,4 +29,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_09_100806) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "reviews", "wines"
 end

@@ -29,9 +29,17 @@ class Api::V1::WinesControllerTest < ActionDispatch::IntegrationTest
     assert response.parsed_body.all? { |wine| wine["price_euros"] >= 10 && wine["price_euros"] <= 30 }
   end
 
-  test "should get a wine by id" do
+  test "should get a wine by id, with no note" do
     get api_v1_wine_url(wines(:one).id)
     assert_equal "Vin de pays", response.parsed_body["name"]
+    assert_nil response.parsed_body["note"]
+    assert_response :success
+  end
+
+  test "should get a wine by id, with a note" do
+    get api_v1_wine_url(wines(:two).id)
+    assert_equal "Beaujolais", response.parsed_body["name"]
+    assert_equal 2.5, response.parsed_body["note"]
     assert_response :success
   end
 

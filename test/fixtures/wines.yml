@@ -4,22 +4,18 @@ one:
   name: "Vin de pays"
   price_euros: 9.99
   store_url: https://www.store1.com
-  note: 1.5
 
 two:
   name: "Beaujolais"
   price_euros: 10
   store_url: https://www.store2.com
-  note: 3.9
 
 tree:
   name: "Bourgogne"
   price_euros: 30
   store_url: https://www.store2.com
-  note: 4
 
 four:
   name: "Château Petrus"
   price_euros: 2599.99
   store_url: https://www.store2.com
-  note: 5

@@ -36,3 +36,5 @@
 /.idea
 
 /coverage
+
+/swagger

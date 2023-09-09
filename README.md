@@ -54,13 +54,15 @@ GET /wines?min_price=10&max_price=20&sort_by=note.desc
 ## Backlog
 
 [MVP1] : 
-  * [ ] App fonctionnelle avec 1 opération simple GET /wines/:id, retourne le nom, prix, url, et note (vide a ce stade)
-  * [ ] [OPTION] Page web qui documente permet de tester l'api
+  * [X] App fonctionnelle avec 1 opération simple GET /wines/:id, retourne le nom, prix, url, et note (vide a ce stade)
+  * [X] [OPTION] Page web qui documente permet de tester l'api
   * [ ] ajouter une note de dégustation : POST /wines/:id/rating
 
 
 
 ## Notes en vrac
+
+### Ressources
 
 https://levelup.gitconnected.com/7-steps-to-create-an-api-in-rails-2f984c7c4286
 https://medium.com/@oliver.seq/creating-a-rest-api-with-rails-2a07f548e5dc
@@ -72,3 +74,10 @@ cd EnergieVinApi/
 rails g resource Wine name:string price:float store_url:string note:float
 
 rails g controller api/v1/wines
+
+### Commandes
+
+    rake rswag  # génère la doc swagger
+    rake test:all  # exec tous les tests (yc rswag)
+    rails s # lance le serveur
+

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/'
+  mount Rswag::Api::Engine => '/api-docs'
 
   namespace :api do
     namespace :v1 do
@@ -6,8 +8,4 @@ Rails.application.routes.draw do
     end
   end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

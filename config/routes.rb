@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :wines
+      resources :wines do
+        post 'reviews', on: :member, to: 'wines#add_review'
+      end
     end
   end
 

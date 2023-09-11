@@ -10,8 +10,9 @@ class Api::V1::WinesController < ApplicationController
     else
       @wines = Wine.all
     end
+    sorted_wines = @wines.order('note DESC')
 
-    render json: @wines
+    render json: sorted_wines, include: :reviews
   end
 
   # GET /api/v1/wines/:id
@@ -20,23 +21,10 @@ class Api::V1::WinesController < ApplicationController
     render json: @wine
   end
 
-  # POST /api/v1/wines
-  def create
-    @wine = Wine.create(wine_params)
-    render json: @wine
-  end
-
-  # PATCH /api/v1/wines/:id
-  def update
+  # POST /api/v1/wines/:id/reviews
+  def add_review
     @wine = Wine.find(params[:id])
-    @wine.update(wine_params)
-    render json: @wine
-  end
-
-  # DELETE /api/v1/wines/:id
-  def destroy
-    @wine = Wine.find(params[:id])
-    @wine.destroy
-    render json: @wine
+    @wine.reviews << Review.create(note: params[:note], comment: params[:comment])
+    render status: :created
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_09_141018) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_062908) do
   create_table "reviews", force: :cascade do |t|
     t.integer "wine_id", null: false
     t.string "comment"
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_09_141018) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["wine_id"], name: "index_reviews_on_wine_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.float "min_price"
+    t.float "max_price"
+    t.string "notification_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wines", force: :cascade do |t|

@@ -59,7 +59,7 @@ GET /wines?min_price=10&max_price=20&sort_by=note.desc
   * [X] ajouter une note de dégustation : POST /wines/:id/reviews
 [MVP 2] ; 
   * [X] Créer POST et GET /search : cette ressource permet de sauvegarder les critères d'une recherche avec min_price, max_price, et également un paramètre  "notification_email" 
-  * [ ] Refacto : créer un Service Object responsable de créer un nouveau vin dans le catalogue, avec également un POST /wines au niveau controlleur
+  * [X] Refacto : créer un Service Object responsable de créer un nouveau vin dans le catalogue, avec également un POST /wines au niveau controlleur
   * [ ] Créer un Service Object qui pour un vin passé en paramètre, identifie les /search qui matchent, et envoie un email à l'utilisateur
 
 

@@ -23,7 +23,7 @@ RSpec.describe 'api/v1/searches', type: :request do
 
   path '/api/v1/searches' do
     post 'Save a search' do
-      tags 'Searches'
+      tags 'Users API'
       consumes 'application/json'
       parameter name: :search, in: :body, schema: searches_spec
 
@@ -37,7 +37,7 @@ RSpec.describe 'api/v1/searches', type: :request do
 
   path '/api/v1/searches' do
     get 'Retrieves all searches' do
-      tags 'Searches'
+      tags 'Users API'
       produces 'application/json', 'application/xml'
       response('200', 'OK') do
         schema type: :array,

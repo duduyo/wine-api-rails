@@ -45,7 +45,7 @@ RSpec.describe 'api/v1/wines', type: :request do
 
   path '/api/v1/wines' do
     get 'Retrieves all wines' do
-      tags 'Wines'
+      tags 'Users API', 'Experts API', 'Admin API'
       parameter name: 'min_price', in: :query, type: :integer, description: 'Minimum price', required: false
       parameter name: 'max_price', in: :query, type: :integer, description: 'Maximum price', required: false
       produces 'application/json', 'application/xml'
@@ -66,12 +66,33 @@ RSpec.describe 'api/v1/wines', type: :request do
         end
       end
     end
+
+    post 'Add a wine' do
+      tags 'Admin API'
+      consumes 'application/json'
+      parameter name: :wine, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          price_euros: { type: :number },
+          store_url: { type: :string },
+        },
+        required: ['name', 'price_euros', 'store_url']
+      }
+
+      response '201', 'Review created' do
+        let(:wine) { { name: 'Wine name', price_euros: 10, store_url: 'https://www.store.com' } }
+        run_test!
+      end
+    end
+
+
   end
 
 
   path '/api/v1/wines/{wine_id}/reviews' do
     post 'Add a review to a wine' do
-      tags 'Wines'
+      tags 'Experts API'
       consumes 'application/json'
       parameter name: :wine_id, in: :path, type: :integer, description: 'Wine id', required: true
       parameter name: :review, in: :body, schema: {

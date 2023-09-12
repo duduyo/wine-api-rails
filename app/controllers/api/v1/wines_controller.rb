@@ -1,4 +1,5 @@
 class Api::V1::WinesController < ApplicationController
+
   # GET /api/v1/wines
   def index
     if params[:min_price] && params[:max_price]
@@ -19,6 +20,13 @@ class Api::V1::WinesController < ApplicationController
   def show
     @wine = Wine.find(params[:id])
     render json: @wine
+  end
+
+  # POST /api/v1/wines
+  def create
+    @wine = WinesService.new.create_wine(params[:name], params[:price_euros], params[:store_url])
+    puts @wine.id
+    render status: :created
   end
 
   # POST /api/v1/wines/:id/reviews

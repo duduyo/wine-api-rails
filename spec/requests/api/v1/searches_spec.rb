@@ -20,12 +20,18 @@ RSpec.describe 'api/v1/searches', type: :request do
     }
   }
 
-
   path '/api/v1/searches' do
     post 'Save a search' do
       tags 'Users API'
       consumes 'application/json'
-      parameter name: :search, in: :body, schema: searches_spec
+      parameter name: :search, in: :body, schema: {
+        type: :object,
+        properties: {
+          min_price: { type: :number, nullable: true },
+          max_price: { type: :number, nullable: true },
+          notification_email: { type: :string, nullable: true },
+        }
+      }
 
       response '201', 'Review created' do
         let(:search) { { max_price: 30, notification_email: 'user@mail.org' } }
@@ -41,7 +47,17 @@ RSpec.describe 'api/v1/searches', type: :request do
       produces 'application/json', 'application/xml'
       response('200', 'OK') do
         schema type: :array,
-                items: searches_spec
+                items: {
+                  type: :object,
+                  properties: {
+                    id: { type: :integer },
+                    min_price: { type: :number, nullable: true },
+                    max_price: { type: :number, nullable: true },
+                    notification_email: { type: :string, nullable: true },
+                    created_at: { type: :string },
+                    updated_at: { type: :string },
+                  }
+                }
 
         run_test! do |response|
           data = JSON.parse(response.body)

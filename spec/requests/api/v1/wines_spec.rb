@@ -24,6 +24,19 @@ RSpec.describe 'api/v1/wines', type: :request do
       note: { type: :number, nullable: true },
       created_at: { type: :string },
       updated_at: { type: :string },
+    },
+    required: ['id', 'name', 'price_euros', 'store_url', 'created_at', 'updated_at']
+  }
+  wine_detail_spec = {
+    type: :object,
+    properties: {
+      id: { type: :integer },
+      name: { type: :string },
+      price_euros: { type: :number },
+      store_url: { type: :string },
+      note: { type: :number, nullable: true },
+      created_at: { type: :string },
+      updated_at: { type: :string },
       reviews: {
         type: :array,
         items: {
@@ -38,13 +51,12 @@ RSpec.describe 'api/v1/wines', type: :request do
           }
         }
       }
-
     },
     required: ['id', 'name', 'price_euros', 'store_url', 'created_at', 'updated_at']
   }
 
   path '/api/v1/wines' do
-    get 'Retrieves all wines' do
+    get 'Retrieves all wines, filtered by min_price and max_price if provided, and ordered by note (descending)' do
       tags 'Users API', 'Experts API', 'Admin API'
       parameter name: 'min_price', in: :query, type: :integer, description: 'Minimum price', required: false
       parameter name: 'max_price', in: :query, type: :integer, description: 'Maximum price', required: false
@@ -89,6 +101,21 @@ RSpec.describe 'api/v1/wines', type: :request do
 
   end
 
+
+  path '/api/v1/wines/{wine_id}' do
+    get 'Get the details of a wine' do
+      tags 'Users API', 'Experts API'
+      consumes 'application/json'
+      parameter name: :wine_id, in: :path, type: :integer, description: 'Wine id', required: true
+      response '200', 'OK' do
+        let(:wine_id) { @beaujolais.id }
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['name']).to eq('Beaujolais')
+        end
+      end
+    end
+  end
 
   path '/api/v1/wines/{wine_id}/reviews' do
     post 'Add a review to a wine' do
